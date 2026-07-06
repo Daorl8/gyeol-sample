@@ -43,13 +43,13 @@
       <div class="form-wrap">
         <form id="bform" novalidate>
           <div class="row2">
-            <div class="field"><label>성함 *</label><input type="text" name="name" required placeholder="홍길동" /></div>
-            <div class="field"><label>연락처 *</label><input type="tel" name="phone" required placeholder="010-0000-0000" /></div>
+            <div class="field"><label for="bf-name">성함 *</label><input id="bf-name" type="text" name="name" required placeholder="홍길동" /></div>
+            <div class="field"><label for="bf-phone">연락처 *</label><input id="bf-phone" type="tel" name="phone" required placeholder="010-0000-0000" /></div>
           </div>
           <div class="row2">
-            <div class="field"><label>희망 날짜 *</label><input type="date" name="date" required /></div>
-            <div class="field"><label>희망 시간</label>
-              <select name="time">
+            <div class="field"><label for="bf-date">희망 날짜 *</label><input id="bf-date" type="date" name="date" required /></div>
+            <div class="field"><label for="bf-time">희망 시간</label>
+              <select id="bf-time" name="time">
                 <option value="">선택</option>
                 <option>11:00</option><option>12:00</option><option>13:00</option>
                 <option>14:00</option><option>15:00</option><option>16:00</option>
@@ -57,16 +57,16 @@
               </select>
             </div>
           </div>
-          <div class="field"><label>원하는 시술</label>
-            <select name="service">
+          <div class="field"><label for="bf-service">원하는 시술</label>
+            <select id="bf-service" name="service">
               <option value="">선택 (상담 후 결정 가능)</option>
               <option>컷</option><option>펌</option><option>컬러</option>
               <option>두피·클리닉</option><option>스타일링</option><option>상담 먼저</option>
             </select>
           </div>
-          <div class="field"><label>요청 사항</label><textarea name="memo" placeholder="모발 고민, 원하는 스타일, 참고 사진 링크 등 자유롭게 적어주세요."></textarea></div>
+          <div class="field"><label for="bf-memo">요청 사항</label><textarea id="bf-memo" name="memo" placeholder="모발 고민, 원하는 스타일, 참고 사진 링크 등 자유롭게 적어주세요."></textarea></div>
           <button type="submit" class="btn btn-fill" style="width:100%">예약 신청하기</button>
-          <div class="form-msg" id="bmsg">✓ 예약 신청이 접수되었습니다. 확인 후 남겨주신 연락처로 연락드릴게요. <span style="color:var(--mut)">(데모 양식 — 실제 전송되지 않습니다)</span></div>
+          <div class="form-msg" id="bmsg" role="status" aria-live="polite">✓ 예약 신청이 접수되었습니다. 확인 후 남겨주신 연락처로 연락드릴게요. <span style="color:var(--mut)">(데모 양식 — 실제 전송되지 않습니다)</span></div>
           <p class="form-note">※ 데모 양식입니다. 실제 운영 시 <strong>네이버예약·카카오톡 채널·문자 알림</strong>과 연동해 드려요.</p>
         </form>
       </div>
@@ -104,6 +104,7 @@
   </footer>
 
   <script>
+    (function(){ var di=document.getElementById('bf-date'); if(di){ var d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); di.min=d.toISOString().slice(0,10); } })();
     document.getElementById('bform').addEventListener('submit', function(e){
       e.preventDefault();
       if(!this.checkValidity()){ this.reportValidity(); return; }
